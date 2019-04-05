@@ -1,8 +1,8 @@
 namespace sztf_II_FF.Kuldemenyek
 {
-    public class Kiscsomag : KuldemenyBase
+    public class AjanlottB10 : KuldemenyBase
     {
-        public Kiscsomag()
+        public AjanlottB10()
         {
             Tomeg = 2000;
         }

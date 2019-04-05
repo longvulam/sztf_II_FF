@@ -1,7 +1,12 @@
 namespace sztf_II_FF.Kuldemenyek
 {
-    public abstract class KuldemenyBase : IKuldemeny
+    public abstract class KuldemenyBase : EntityBase, IKuldemeny
     {
+        protected KuldemenyBase()
+        {
+            Count++;
+        }
+
         public int CompareTo(object obj)
         {
             var masikCsomag = (obj as IKuldemeny);
@@ -25,6 +30,7 @@ namespace sztf_II_FF.Kuldemenyek
         }
 
         public int Prioritas { get; set; }
-        public float Tomeg { get; set; }
+        public int Tomeg { get; set; }
+        public static int Count { get; set; }
     }
 }

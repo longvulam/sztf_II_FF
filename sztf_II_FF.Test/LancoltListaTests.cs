@@ -81,10 +81,6 @@ namespace sztf_II_FF.Test
 
             lista.Bejaras();
             Console.WriteLine(kozepesPrioCs2.GetHashCode());
-
-            //BeszurasVegere(kozepesPrioCs3);
-            //lista.Length.Should().Be(4);
-
         }
 
         private void BeszurasVegere(KisCsomag csomag)

@@ -45,8 +45,13 @@
   <ItemGroup>
     <Compile Include="FutarBase.cs" />
     <Compile Include="Jarmu.cs" />
+    <Compile Include="Kuldemenyek\AjanlottB10.cs" />
+    <Compile Include="Kuldemenyek\EgyszeruLevel.cs" />
+    <Compile Include="Kuldemenyek\ElsobsegiKicsi.cs" />
+    <Compile Include="Kuldemenyek\ElsobsegiNagy.cs" />
+    <Compile Include="Kuldemenyek\EntityBase.cs" />
     <Compile Include="Kuldemenyek\IKuldemeny.cs" />
-    <Compile Include="Kuldemenyek\KisCsomag.cs" />
+    <Compile Include="Kuldemenyek\Kiscsomag.cs" />
     <Compile Include="Kuldemenyek\KuldemenyBase.cs" />
     <Compile Include="LancoltLista.cs" />
     <Compile Include="Program.cs" />
@@ -55,6 +60,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="InputFiles\futarok.txt" />
+    <Content Include="InputFiles\kuldemenyek.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
