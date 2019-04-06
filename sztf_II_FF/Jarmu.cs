@@ -3,8 +3,8 @@
     public enum Jarmu
     {
         Bicikli,
+        Motorkerekpar,
         Szemelygepkocsi,
         Tehergepkocsi,
-        Motorkerekpar,
     }
 }

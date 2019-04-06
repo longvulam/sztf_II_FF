@@ -43,7 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FutarBase.cs" />
+    <Compile Include="Futarok\BiciklisFutar.cs" />
+    <Compile Include="Futarok\FutarBase.cs" />
+    <Compile Include="Futarok\KocsiFutar.cs" />
+    <Compile Include="Futarok\MotorosFutar.cs" />
+    <Compile Include="Futarok\TeherKocsisFutar.cs" />
     <Compile Include="Jarmu.cs" />
     <Compile Include="Kuldemenyek\AjanlottB10.cs" />
     <Compile Include="Kuldemenyek\EgyszeruLevel.cs" />

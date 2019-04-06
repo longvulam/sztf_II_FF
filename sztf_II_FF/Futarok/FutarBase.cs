@@ -1,8 +1,8 @@
 ﻿using sztf_II_FF.Kuldemenyek;
 
-namespace sztf_II_FF
+namespace sztf_II_FF.Futarok
 {
-    public class FutarBase: EntityBase
+    public class FutarBase : EntityBase
     {
         public bool SzabadsagonVan { get; set; }
         public Jarmu Jarmu { get; set; }
