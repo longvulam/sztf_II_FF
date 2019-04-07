@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\NincsIlyenJarmuException.cs" />
     <Compile Include="Futarok\BiciklisFutar.cs" />
     <Compile Include="Futarok\FutarBase.cs" />
     <Compile Include="Futarok\KocsiFutar.cs" />
@@ -65,8 +66,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="InputFiles\futarok.txt" />
-    <Content Include="InputFiles\kuldemenyek.txt" />
+    <Content Include="InputFiles\futarok.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="InputFiles\kuldemenyek.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using sztf_II_FF.Exceptions;
 using sztf_II_FF.Futarok;
 using sztf_II_FF.Kuldemenyek;
 
@@ -11,16 +12,19 @@ namespace sztf_II_FF
 {
     class FileReader
     {
-        public static void ReadFromFile<T>(LancoltLista<T> lista) where T : IKuldemeny
+        public static List<FutarBase> FutarokBeolvass()
         {
+            List<FutarBase> lista = new List<FutarBase>();
             StreamReader sr = new StreamReader("InputFiles/futarok.txt");
+            int azon = 1;
             while (!sr.EndOfStream)
             {
                 var line = sr.ReadLine().Split(' ');
                 //jarmu szabadsagonVanE SzallitasiKapacitas
-                var jarmuEnum = (Jarmu)Enum.Parse(typeof(Jarmu), line[0]);
+                string jarmuStr = line[0];
+                var jarmuEnum = (Jarmu)Enum.Parse(typeof(Jarmu), jarmuStr);
 
-                FutarBase jarmu;
+                FutarBase jarmu = null;
                 switch (jarmuEnum)
                 {
                     case Jarmu.Bicikli:
@@ -35,7 +39,28 @@ namespace sztf_II_FF
                     case Jarmu.Tehergepkocsi:
                         jarmu = new TeherKocsisFutar();
                         break;
+                    default:
+                        throw new NincsIlyenJarmuException($"Nem létezik ilyen Jármű: {jarmuStr}");
                 }
+
+                lista.Add(jarmu);
+
+                jarmu.Id = azon++;
+                jarmu.Jarmu = jarmuEnum;
+                jarmu.Dolgozik = line[1] != "van";
+                jarmu.SzallitasiKapacitas = int.Parse(line[2]);
+            }
+
+            return lista;
+        }
+
+        public static void KuldemenyekBeolvass(LancoltLista<IKuldemeny> lista)
+        {
+            StreamReader sr = new StreamReader("InputFiles/kuldemenyek.txt");
+            while (!sr.EndOfStream)
+            {
+                var line = sr.ReadLine().Split(' ');
+                //
             }
         }
     }
@@ -45,9 +70,15 @@ namespace sztf_II_FF
         static void Main(string[] args)
         {
             var elemek = new LancoltLista<IKuldemeny>();
-            FileReader.ReadFromFile(elemek);
+            FileReader.KuldemenyekBeolvass(elemek);
 
-            elemek.Bejaras();
+
+            List<FutarBase> futarok = FileReader.FutarokBeolvass();
+
+            Console.WriteLine(string.Join("\n", futarok));
+
+            //elemek.Bejaras();
+
 
         }
     }

@@ -1,1 +1,10 @@
-﻿
+﻿Tipus Prioritas Tomeg
+ 1 
+ 2 
+ 5 
+ 4 
+ 9 
+ 7 
+ 6 
+ 3 
+ 10 
