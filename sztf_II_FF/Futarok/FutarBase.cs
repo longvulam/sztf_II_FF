@@ -3,11 +3,10 @@ using sztf_II_FF.Kuldemenyek;
 
 namespace sztf_II_FF.Futarok
 {
-    public class FutarBase : EntityBase, IComparable
+    public abstract class FutarBase : EntityBase, IComparable
     {
         public bool Dolgozik { get; set; }
-        public Jarmu Jarmu { get; set; }
-        public float SzallitasiKapacitas { get; set; }
+        public int SzallitasiKapacitas { get; set; }
 
 
         public override string ToString()

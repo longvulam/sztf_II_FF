@@ -2,5 +2,9 @@
 {
     internal class TeherKocsisFutar : FutarBase
     {
+        public TeherKocsisFutar()
+        {
+            SzallitasiKapacitas = 46000;
+        }
     }
 }

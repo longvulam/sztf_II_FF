@@ -1,4 +1,4 @@
-﻿Bicikli nincs 46000
-Motorkerekpar van 91000
-Szemelygepkocsi van 400000
-Tehergepkocsi van 3500000
+﻿Bicikli-nincs-4600
+Motorkerekpar-nincs-9100
+Szemelygepkocsi-nincs-40000
+Tehergepkocsi-van-350000

@@ -4,27 +4,30 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using sztf_II_FF.Exceptions;
 using sztf_II_FF.Futarok;
+using sztf_II_FF.Kivetelek;
 using sztf_II_FF.Kuldemenyek;
 
 namespace sztf_II_FF
 {
     class FileReader
     {
-        public static List<FutarBase> FutarokBeolvass()
+        public static List<FutarBase> ReadCarriers()
         {
             List<FutarBase> lista = new List<FutarBase>();
             StreamReader sr = new StreamReader("InputFiles/futarok.txt");
             int azon = 1;
             while (!sr.EndOfStream)
             {
-                var line = sr.ReadLine().Split(' ');
+                string line = sr.ReadLine();
+                if (line == null) continue;
+
+                var parts = line.Split('-');
                 //jarmu szabadsagonVanE SzallitasiKapacitas
-                string jarmuStr = line[0];
+                string jarmuStr = parts[0];
                 var jarmuEnum = (Jarmu)Enum.Parse(typeof(Jarmu), jarmuStr);
 
-                FutarBase jarmu = null;
+                FutarBase jarmu;
                 switch (jarmuEnum)
                 {
                     case Jarmu.Bicikli:
@@ -45,39 +48,66 @@ namespace sztf_II_FF
 
                 lista.Add(jarmu);
 
-                jarmu.Id = azon++;
-                jarmu.Jarmu = jarmuEnum;
-                jarmu.Dolgozik = line[1] != "van";
-                jarmu.SzallitasiKapacitas = int.Parse(line[2]);
+                jarmu.Id = azon;
+                jarmu.Dolgozik = parts[1] != "van";
+                jarmu.SzallitasiKapacitas = int.Parse(parts[2]);
+            }
+            return lista;
+        }
+
+        public static LancoltLista<IKuldemeny> ReadPackages()
+        {
+            LancoltLista<IKuldemeny> lista = new LancoltLista<IKuldemeny>();
+            StreamReader sr = new StreamReader("InputFiles/kuldemenyek.txt");
+            int azon = 1;
+            while (!sr.EndOfStream)
+            {
+                string line = sr.ReadLine();
+                if (line == null) continue;
+
+                var parts = line.Split('-');
+                //Tipus Prioritas Tomeg
+                string tipus = parts[0];
+                int prio = int.Parse(parts[1]);
+                int tomeg = int.Parse(parts[2]);
+
+                KuldemenyBase kuldemeny;
+                switch (tipus)
+                {
+                    case nameof(NormalLevel):
+                        kuldemeny = new NormalLevel(prio, tomeg);
+                        break;
+                    case nameof(ElsobbsegiLevel):
+                        kuldemeny = new ElsobbsegiLevel(prio, tomeg);
+                        break;
+                    case nameof(NormalCsomag):
+                        kuldemeny = new NormalCsomag(prio, tomeg);
+                        break;
+                    case nameof(ElsobbsegiCsomag):
+                        kuldemeny = new ElsobbsegiCsomag(prio, tomeg);
+                        break;
+                    default:
+                        throw new NincsIlyenKuldemenyException($"Nem létezik ilyen Küldemény: {tipus}");
+                }
+
+                kuldemeny.Id = azon++;
+                lista.BeszurasElejere(kuldemeny);
             }
 
             return lista;
         }
-
-        public static void KuldemenyekBeolvass(LancoltLista<IKuldemeny> lista)
-        {
-            StreamReader sr = new StreamReader("InputFiles/kuldemenyek.txt");
-            while (!sr.EndOfStream)
-            {
-                var line = sr.ReadLine().Split(' ');
-                //
-            }
-        }
     }
     class Program
     {
-
         static void Main(string[] args)
         {
-            var elemek = new LancoltLista<IKuldemeny>();
-            FileReader.KuldemenyekBeolvass(elemek);
-
-
-            List<FutarBase> futarok = FileReader.FutarokBeolvass();
+            List<FutarBase> futarok = FileReader.ReadCarriers();
+            LancoltLista<IKuldemeny> kuldemenyek = FileReader.ReadPackages();
 
             Console.WriteLine(string.Join("\n", futarok));
+            Console.WriteLine("\n=============================\n");
+            kuldemenyek.Bejaras();
 
-            //elemek.Bejaras();
 
 
         }

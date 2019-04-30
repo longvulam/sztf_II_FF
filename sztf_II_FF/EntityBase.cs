@@ -1,4 +1,4 @@
-namespace sztf_II_FF.Kuldemenyek
+namespace sztf_II_FF
 {
     public class EntityBase
     {

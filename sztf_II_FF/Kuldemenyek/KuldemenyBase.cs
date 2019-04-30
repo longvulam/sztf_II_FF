@@ -2,15 +2,18 @@ namespace sztf_II_FF.Kuldemenyek
 {
     public abstract class KuldemenyBase : EntityBase, IKuldemeny
     {
-        protected KuldemenyBase()
+        protected KuldemenyBase(int prio, int tomeg)
         {
+            Prioritas = prio;
+            Tomeg = tomeg;
             Count++;
         }
 
         public int CompareTo(object obj)
         {
-            var masikCsomag = (obj as IKuldemeny);
-            var csomag = (this as IKuldemeny);
+            if (!(obj is IKuldemeny)) return 1;
+            var masikCsomag = (IKuldemeny)obj;
+            var csomag = (IKuldemeny)this;
             if (csomag.Prioritas < masikCsomag.Prioritas)
             {
                 return -1;
@@ -18,7 +21,7 @@ namespace sztf_II_FF.Kuldemenyek
 
             if (csomag.Prioritas == masikCsomag.Prioritas)
             {
-                return 0;
+                return csomag.Tomeg > masikCsomag.Tomeg ? 1 : csomag.Tomeg == masikCsomag.Tomeg ? 0 : -1;
             }
 
             return 1;
@@ -26,11 +29,11 @@ namespace sztf_II_FF.Kuldemenyek
 
         public override string ToString()
         {
-            return $"Prio: {Prioritas}, Tomeg: {Tomeg}, Hash: {GetHashCode()}";
+            return $"Id: {Id} Prio: {Prioritas}, Tomeg: {Tomeg}, Hash: {GetHashCode()}";
         }
 
-        public int Prioritas { get; set; }
-        public int Tomeg { get; set; }
+        public int Prioritas { get; }
+        public int Tomeg { get; }
         public static int Count { get; set; }
     }
 }

@@ -2,5 +2,9 @@
 {
     internal class BiciklisFutar : FutarBase
     {
+        public BiciklisFutar()
+        {
+            SzallitasiKapacitas = 46000;
+        }
     }
 }

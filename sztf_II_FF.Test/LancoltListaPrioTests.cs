@@ -6,40 +6,17 @@ using sztf_II_FF.Kuldemenyek;
 namespace sztf_II_FF.Test
 {
     [TestClass]
-    public class LancoltListaTests
+    public class LancoltListaPrioTests
     {
-        private readonly KisCsomag magasPrioCs = new KisCsomag
-        {
-            Prioritas = 10
-        };
+        private readonly KuldemenyBase magasPrioCs = new NormalLevel(10, 0);
+        private readonly KuldemenyBase magasPrioCs2 = new NormalLevel(10, 0);
 
-        private readonly KisCsomag magasPrioCs2 = new KisCsomag
-        {
-            Prioritas = 10
-        };
+        private readonly KuldemenyBase kozepesPrioCs = new NormalLevel(5, 0);
+        private readonly KuldemenyBase kozepesPrioCs2 = new NormalLevel(5, 0);
+        private readonly KuldemenyBase kozepesPrioCs3 = new NormalLevel(5, 0);
 
-
-
-        private readonly KisCsomag kozepesPrioCs = new KisCsomag
-        {
-            Prioritas = 5
-        };
-
-        private readonly KisCsomag kozepesPrioCs2 = new KisCsomag
-        {
-            Prioritas = 5
-        };
-
-        private readonly KisCsomag kozepesPrioCs3 = new KisCsomag
-        {
-            Prioritas = 5
-        };
-
-        private readonly KisCsomag kisPrioCs = new KisCsomag
-        {
-            Prioritas = 0
-        };
-
+        private readonly KuldemenyBase kisPrioCs = new NormalLevel(1, 0);
+        
         private LancoltLista<IKuldemeny> lista;
 
         [TestInitialize]
@@ -83,18 +60,18 @@ namespace sztf_II_FF.Test
             Console.WriteLine(kozepesPrioCs2.GetHashCode());
         }
 
-        private void BeszurasVegere(KisCsomag csomag)
+        private void BeszurasVegere(IKuldemeny csomag)
         {
-            Action<KisCsomag> act = lista.BeszurasVegere;
+            Action<IKuldemeny> act = lista.BeszurasVegere;
 
             act.Invoking(y => y.Invoke(csomag))
                 .Should()
                 .NotThrow();
         }
 
-        private void BeszurasElejere(KisCsomag csomag)
+        private void BeszurasElejere(IKuldemeny csomag)
         {
-            Action<KisCsomag> act = lista.BeszurasElejere;
+            Action<IKuldemeny> act = lista.BeszurasElejere;
 
             act.Invoking(y => y.Invoke(csomag))
                 .Should()

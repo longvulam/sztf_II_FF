@@ -4,10 +4,10 @@ namespace sztf_II_FF.Kuldemenyek
 {
     public interface IKuldemeny : IComparable
     {
-        int Prioritas { get; set; }
+        int Prioritas { get; }
         /// <summary>
         /// Tömeg grammban megadva
         /// </summary>
-        int Tomeg { get; set; }
+        int Tomeg { get; }
     }
 }

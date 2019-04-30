@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace sztf_II_FF.Exceptions
+namespace sztf_II_FF.Kivetelek
 {
     [Serializable]
     internal class NincsIlyenJarmuException : Exception

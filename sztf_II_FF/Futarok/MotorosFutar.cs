@@ -2,5 +2,9 @@
 {
     internal class MotorosFutar : FutarBase
     {
+        public MotorosFutar()
+        {
+            SzallitasiKapacitas = 46000;
+        }
     }
 }

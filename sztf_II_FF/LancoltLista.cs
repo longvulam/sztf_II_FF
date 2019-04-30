@@ -41,6 +41,20 @@ namespace sztf_II_FF
                 p = p.kovetkezo;
             }
 
+            if (p == fej && ujTartalom.CompareTo(fej.tartalom) > 0)
+            {
+                uj.kovetkezo = fej;
+                fej = uj;
+                return;
+            }
+
+            if (p.kovetkezo != null)
+            {
+                uj.kovetkezo = p.kovetkezo;
+                p.kovetkezo = uj;
+                return;
+            }
+
             p.kovetkezo = uj;
 
         }
