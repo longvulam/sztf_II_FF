@@ -12,9 +12,9 @@ namespace sztf_II_FF
 {
     class FileReader
     {
-        public static List<FutarBase> ReadCarriers()
+        public static List<Futar> ReadCarriers()
         {
-            List<FutarBase> lista = new List<FutarBase>();
+            List<Futar> lista = new List<Futar>();
             StreamReader sr = new StreamReader("InputFiles/futarok.txt");
             int azon = 1;
             while (!sr.EndOfStream)
@@ -27,7 +27,7 @@ namespace sztf_II_FF
                 string jarmuStr = parts[0];
                 var jarmuEnum = (Jarmu)Enum.Parse(typeof(Jarmu), jarmuStr);
 
-                FutarBase jarmu;
+                Futar jarmu;
                 switch (jarmuEnum)
                 {
                     case Jarmu.Bicikli:
@@ -101,14 +101,33 @@ namespace sztf_II_FF
     {
         static void Main(string[] args)
         {
-            List<FutarBase> futarok = FileReader.ReadCarriers();
+            List<Futar> futarok = FileReader.ReadCarriers();
             LancoltLista<IKuldemeny> kuldemenyek = FileReader.ReadPackages();
 
             Console.WriteLine(string.Join("\n", futarok));
             Console.WriteLine("\n=============================\n");
             kuldemenyek.Bejaras();
 
+            var rendezdettFutarok = futarok.OrderBy(x => x.SzallitasiKapacitas);
+            FutarnakBeoszt(rendezdettFutarok[0], kuldemenyek);
+        }
 
+        private static void FutarnakBeoszt(Futar futar, LancoltLista<IKuldemeny> kuldemenyek)
+        {
+            var p = kuldemenyek.Pop();
+
+            while (p != null)
+            {
+                if (futar.AktalisTeher + p.Tomeg < futar.SzallitasiKapacitas)
+                {
+                    futar.KuldemenyHozzaadasa(p);
+                    p = kuldemenyek.Pop();
+                }
+                else
+                {
+
+                }
+            }
 
         }
     }

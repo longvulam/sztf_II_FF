@@ -4,7 +4,6 @@ namespace sztf_II_FF
     public class LancoltLista<T> where T : IComparable
     {
         private int count;
-        
 
         public int Length => count;
 
@@ -96,6 +95,43 @@ namespace sztf_II_FF
                 Feldolgoz(p.tartalom);
                 p = p.kovetkezo;
             }
+        }
+
+        public T Kovetkezo(bool feltetel)
+        {
+            var p = fej;
+            while (p != null && !feltetel)
+            {
+                p = p.kovetkezo;
+            }
+
+            if (p == null)
+            {
+                return null;
+            }
+
+            return p.tartalom;
+        }
+
+        /// <summary>
+        /// Get the first item's content and removes it from the list.
+        /// </summary>
+        /// <returns></returns>
+        public T Pop()
+        {
+            ListaElem p = fej;
+            fej = p.kovetkezo;
+            p.kovetkezo = null;
+            return p.tartalom;
+        }
+
+        /// <summary>
+        /// Get the first item's content.
+        /// </summary>
+        /// <returns></returns>
+        public T Peek()
+        {
+            return fej.tartalom;
         }
 
         public void Torles(T torlendo)

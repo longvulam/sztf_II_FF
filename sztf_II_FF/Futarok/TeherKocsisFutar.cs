@@ -1,6 +1,6 @@
 ﻿namespace sztf_II_FF.Futarok
 {
-    internal class TeherKocsisFutar : FutarBase
+    internal class TeherKocsisFutar : Futar
     {
         public TeherKocsisFutar()
         {

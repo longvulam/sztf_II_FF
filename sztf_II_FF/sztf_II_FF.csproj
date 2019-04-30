@@ -47,7 +47,7 @@
     <Compile Include="Kivetelek\NincsIlyenJarmuException.cs" />
     <Compile Include="Kivetelek\NincsIlyenKuldemenyException.cs" />
     <Compile Include="Futarok\BiciklisFutar.cs" />
-    <Compile Include="Futarok\FutarBase.cs" />
+    <Compile Include="Futarok\Futar.cs" />
     <Compile Include="Futarok\KocsiFutar.cs" />
     <Compile Include="Futarok\MotorosFutar.cs" />
     <Compile Include="Futarok\TeherKocsisFutar.cs" />
