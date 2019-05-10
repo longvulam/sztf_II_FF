@@ -4,7 +4,7 @@
     {
         public BiciklisFutar()
         {
-            SzallitasiKapacitas = 46000;
+            Kapacitas = 46000;
         }
     }
 }

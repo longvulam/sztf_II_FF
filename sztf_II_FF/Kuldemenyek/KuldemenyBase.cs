@@ -1,12 +1,22 @@
+using System;
+
 namespace sztf_II_FF.Kuldemenyek
 {
     public abstract class KuldemenyBase : EntityBase, IKuldemeny
     {
+        private static int IdIndex = 1;
+        public int Prioritas { get; set; }
+        public int Tomeg { get; }
+        public bool Beosztva { get; set; }
+
+        public static int Count { get; set; }
+
         protected KuldemenyBase(int prio, int tomeg)
         {
             Prioritas = prio;
             Tomeg = tomeg;
             Count++;
+            Id = IdIndex++;
         }
 
         public int CompareTo(object obj)
@@ -29,11 +39,8 @@ namespace sztf_II_FF.Kuldemenyek
 
         public override string ToString()
         {
-            return $"Id: {Id} Prio: {Prioritas}, Tomeg: {Tomeg}, Hash: {GetHashCode()}";
+            var beosztvaHun = Beosztva ? $"Igen" : "Nem";
+            return $"Id: {Id} Prio: {Prioritas}, Tomeg: {Tomeg}, Beosztva: {beosztvaHun}";
         }
-
-        public int Prioritas { get; }
-        public int Tomeg { get; }
-        public static int Count { get; set; }
     }
 }

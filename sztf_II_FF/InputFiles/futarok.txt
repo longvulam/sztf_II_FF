@@ -1,4 +1,4 @@
-﻿Bicikli-nincs-4600
-Motorkerekpar-nincs-9100
-Szemelygepkocsi-nincs-40000
+﻿Bicikli-van-4600
+Motorkerekpar-nincs-11000
+Szemelygepkocsi-van-40000
 Tehergepkocsi-van-350000

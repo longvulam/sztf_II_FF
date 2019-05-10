@@ -7,8 +7,9 @@ namespace sztf_II_FF.Futarok
     public abstract class Futar : EntityBase, IComparable
     {
         public bool Dolgozik { get; set; }
-        public int SzallitasiKapacitas { get; set; }
+        public int Kapacitas { get; set; }
         public int AktalisTeher { get; set; }
+        public bool TeleVan { get; set; }
 
         public IList<IKuldemeny> Kuldemenyek = new List<IKuldemeny>();
 
@@ -17,22 +18,24 @@ namespace sztf_II_FF.Futarok
             AktalisTeher = 0;
         }
 
-        public void KuldemenyHozzaadasa(IKuldemeny kuldemeny)
-        {
-            AktalisTeher += kuldemeny.Tomeg;
-            Kuldemenyek.Add(kuldemeny);
-        }
 
         public void UjNap()
         {
             AktalisTeher = 0;
             Kuldemenyek.Clear();
+            TeleVan = false;
+        }
+
+        public void Kiiras()
+        {
+            Console.WriteLine("\n"+ToString() + ":\n");
+            Console.WriteLine($"{string.Join("\n", Kuldemenyek)}\n");
         }
 
         public override string ToString()
         {
             var dolgozikStr = Dolgozik ? "Dolgozik" : "Nem";
-            return $"{Id}: {GetType().Name} -- {dolgozikStr} -- {SzallitasiKapacitas} gramm";
+            return $"{Id}: {GetType().Name} -- {dolgozikStr} -- {Kapacitas} gramm";
         }
 
         public int CompareTo(object obj)
@@ -43,7 +46,7 @@ namespace sztf_II_FF.Futarok
             var other = (Futar)obj;
             var szabadsagonVanComparison = Dolgozik.CompareTo(other.Dolgozik);
             if (szabadsagonVanComparison != 0) return szabadsagonVanComparison;
-            return SzallitasiKapacitas.CompareTo(other.SzallitasiKapacitas);
+            return Kapacitas.CompareTo(other.Kapacitas);
         }
     }
 }

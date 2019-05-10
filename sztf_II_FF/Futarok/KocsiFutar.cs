@@ -4,7 +4,7 @@
     {
         public KocsiFutar()
         {
-            SzallitasiKapacitas = 46000;
+            Kapacitas = 46000;
         }
     }
 }

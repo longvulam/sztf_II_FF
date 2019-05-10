@@ -1,10 +1,10 @@
 ﻿using System;
 namespace sztf_II_FF
 {
-    public class LancoltLista<T> where T : IComparable
+    public class LancoltLista<T> where T : class, IComparable
     {
         private int count;
-
+        private ListaElem aktualisElem;
         public int Length => count;
 
         class ListaElem
@@ -18,6 +18,17 @@ namespace sztf_II_FF
         public LancoltLista()
         {
             fej = null;
+        }
+
+        public bool Any(Func<T, bool> boolExpr)
+        {
+            ListaElem p = fej;
+            while (p != null && !boolExpr(p.tartalom))
+            {
+                p = p.kovetkezo;
+            }
+
+            return p != null;
         }
 
         public void BeszurasElejere(T ujTartalom)
@@ -97,20 +108,30 @@ namespace sztf_II_FF
             }
         }
 
-        public T Kovetkezo(bool feltetel)
+        public void Bejaras(Action<T> action)
         {
-            var p = fej;
-            while (p != null && !feltetel)
+            ListaElem p = fej;
+            while (p != null)
+            {
+                action(p.tartalom);
+                p = p.kovetkezo;
+            }
+        }
+
+        public T Kovetkezo(Func<T, bool> boolExpr)
+        {
+            if (aktualisElem == null)
+            {
+                aktualisElem = fej;
+            }
+
+            var p = aktualisElem == fej ? aktualisElem : aktualisElem.kovetkezo;
+            while (p != null && !boolExpr(p.tartalom))
             {
                 p = p.kovetkezo;
             }
-
-            if (p == null)
-            {
-                return null;
-            }
-
-            return p.tartalom;
+            aktualisElem = p;
+            return p?.tartalom;
         }
 
         /// <summary>
@@ -150,6 +171,8 @@ namespace sztf_II_FF
                     fej = p.kovetkezo;
                 else                            // megvan (többi elem között)
                     e.kovetkezo = p.kovetkezo;
+
+                count--;
             }
             else                                // nem talált VAGY üres lista
             {
